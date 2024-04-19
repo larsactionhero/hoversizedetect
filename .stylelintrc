@@ -1,0 +1,8 @@
+{
+  "extends": "stylelint-config-twbs-bootstrap",
+  "rules": {
+    "selector-no-qualifying-type": null,
+    "declaration-no-important": null,
+    "selector-max-type": null
+  }
+}

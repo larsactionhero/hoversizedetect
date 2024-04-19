@@ -1,0 +1,1 @@
+import HoverSizeDetect from "./src/js/hoversizedetect";

@@ -1,0 +1,30 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "env": {
+    "browser": true
+  },
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "eslint-enable-next-line": "off",
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "func-names": "off",
+    "no-process-exit": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off",
+    "linebreak-style": "off",
+    "no-extraneous-dependencies": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+            ["@", "./src"],
+            ["~", "./node_modules"]
+        ],
+        "extensions": [".js", ".ts", ".vue"]
+      }
+    }
+  }
+} 
