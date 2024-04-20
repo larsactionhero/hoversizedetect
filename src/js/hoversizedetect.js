@@ -15,10 +15,16 @@
 export default class HoverSizeDetect {
   // eslint-disable-next-line no-unused-vars
   constructor(options) {
+    this.options = options;
     this.mediaQueryList = null;
     this.hasHoverMode = false;
     this.isAbove = false;
-    this.breakpoint = 992 || options.breakpoint;
+    this.breakpoint = null;
+    this.deviceInfo = {};
+    this.breakpoint = this.options.breakpoint || 992;
+    this.debugOutputElement = this.options.debugOutputElement || console;
+    this.debug = 'debugOutputElement' in this.options;
+    console.log(this.debug);
   }
 
   getMediaQueryList() {
@@ -81,38 +87,35 @@ export default class HoverSizeDetect {
    *
    */
   setDeviceInfo() {
-    this.isAbove = window.innerWidth >= this.breakpoint;
+    const winW = window.innerWidth;
+    const winH = window.innerHeight;
+
+    this.isAbove = winW >= this.breakpoint;
+    this.deviceInfo.width = winW;
+    this.deviceInfo.height = winH;
 
     // 1) >= bp, has hover
     if (this.isAbove && this.hasHover) {
-      this.deviceInfo = {
-        info: `is >= ${this.breakpoint}, has hover`,
-        mode: 1,
-      };
+      this.deviceInfo.info = `is >= ${this.breakpoint}, has hover`;
+      this.deviceInfo.mode = 1;
     }
 
     // 2) < bp, no hover
     if (!this.isAbove && !this.hasHover) {
-      this.deviceInfo = {
-        info: `is < ${this.breakpoint}, no hover`,
-        mode: 2,
-      };
+      this.deviceInfo.info = `is < ${this.breakpoint}, no hover`;
+      this.deviceInfo.mode = 2;
     }
 
     // 3) >= bp, no hover
     if (this.isAbove && !this.hasHover) {
-      this.deviceInfo = {
-        info: `is >= ${this.breakpoint}, no hover`,
-        mode: 3,
-      };
+      this.deviceInfo.info = `is >= ${this.breakpoint}, no hover`;
+      this.deviceInfo.mode = 3;
     }
 
     // 4) < bp, has hover
     if (!this.isAbove && this.hasHover) {
-      this.deviceInfo = {
-        info: `is < ${this.breakpoint}, has hover`,
-        mode: 4,
-      };
+      this.deviceInfo.info = `is < ${this.breakpoint}, has hover`;
+      this.deviceInfo.mode = 4;
     }
 
     this.setBodyClasses();
@@ -122,8 +125,28 @@ export default class HoverSizeDetect {
     return this.deviceInfo;
   }
 
+  debugOutput() {
+    if (this.debugOutputElement instanceof HTMLElement) {
+      this.debug = true;
+      this.debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
+    } else {
+      console.log(this.deviceInfo);
+    }
+  }
+
   init() {
     this.getMediaQueryList();
-    this.setDeviceInfo();
+    this.setDeviceInfo(); // initially set info
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      this.deviceInfo.height = entries[0].target.clientHeight;
+      this.deviceInfo.width = entries[0].target.clientWidth;
+      this.setDeviceInfo();
+      this.setBodyClass();
+
+      if (this.debug) this.debugOutput();
+    });
+
+    resizeObserver.observe(document.body);
   }
 }
