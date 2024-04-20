@@ -9,7 +9,24 @@
   </head>
   <body>
     <h1>Example</h1>
+
+    <h4>JS:</h4>
+    <code><pre>
+  import HoverSizeDetect from '../../js/hoversizedetect';
+
+  const options = {
+    breakpoint: 992,
+    debugOutputElement: document.querySelector('.example-output'),
+  };
+
+  const hoversizedetect = new HoverSizeDetect(options);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    hoversizedetect.init();
+  });</pre></code>
+    <h4>Provided Infomation</h4>
     <div class="example-output"></div>
+    <small>Note: in this example, output is also shown in console.</small>
     <script type="module" src="./js/example.js"></script>
   </body>
 </html>

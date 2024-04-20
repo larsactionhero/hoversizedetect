@@ -9,8 +9,30 @@ body {
 
 .example-output {
   padding: 1rem;
-  background-color: #f2f2f2;
-  border: 1px solid #f4f4f4;
+  background-color: #0e6b75;
+  color: #fff;
   border-radius: 10px;
-  min-height: 30px;
+  display: inline-block;
+
+  * {
+    font-size: 0.75rem;
+  }
+}
+
+h4 {
+  margin-bottom: 0.5rem;
+}
+
+small {
+  margin-top: 10px;
+  display: block;
+}
+
+code {
+  padding: 10px;
+  background-color: #f2edea;
+  display: block;
+  border-radius: 10px;
+  font-size: 12px;
+  overflow: auto;
 }
