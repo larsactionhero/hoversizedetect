@@ -48,10 +48,10 @@ So if config value is set to **992**, device info will return "_is >= 992px_".<b
 #### Screenmodes:
 | screenMode | Returned information |
 |---|---|
-| 1 | >= bp, has hover 
-| 2 | < bp, no hover |
-| 3 | >= bp, no hover |
-| 4 | < bp, has hover |
+| 1 | >= breakpoint, has hover 
+| 2 | < breakpoint, no hover |
+| 3 | >= breakpoint, no hover |
+| 4 | < breakpoint, has hover |
 
 
 Collected data is can be accessed via `hoversizedetect.getInfo();`.<br><br>
