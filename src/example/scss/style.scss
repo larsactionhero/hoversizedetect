@@ -1,6 +1,6 @@
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .example {
@@ -19,13 +19,8 @@ body {
   }
 }
 
-h4 {
+h1,h2,h3,h4,h5,h6 {
   margin-bottom: 0.5rem;
-}
-
-small {
-  margin-top: 10px;
-  display: block;
 }
 
 code {
@@ -35,4 +30,8 @@ code {
   border-radius: 10px;
   font-size: 12px;
   overflow: auto;
+}
+
+p code {
+  padding: 5px 8px;
 }
