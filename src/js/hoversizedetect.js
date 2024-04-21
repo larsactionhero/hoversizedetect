@@ -22,7 +22,7 @@ export default class HoverSizeDetect {
     this.breakpoint = null;
     this.deviceInfo = {};
     this.breakpoint = options.breakpoint || 992;
-    this.debugOutputElement = options.debugOutputElement || null;
+    this.debugOutputElement = null;
     this.debug = options.debug || false;
   }
 
@@ -125,12 +125,9 @@ export default class HoverSizeDetect {
   }
 
   debugOutput() {
-    if ('debugOutputElement' in this.options) {
-      if (this.debugOutputElement instanceof HTMLElement) {
-        this.debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
-      } else {
-        console.log(this.deviceInfo);
-      }
+    const debugOutputElement = document.querySelector('.example-output');
+    if (debugOutputElement) {
+      this.debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
     } else {
       console.log(this.deviceInfo);
     }
