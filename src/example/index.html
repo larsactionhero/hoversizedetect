@@ -16,6 +16,7 @@
 
   const options = {
     breakpoint: 992,
+    debug: true,
     debugOutputElement: document.querySelector('.example-output'),
   };
 
@@ -25,8 +26,10 @@
     hoversizedetect.init();
   });</pre></code>
     <h4>Provided Infomation</h4>
-    <div class="example-output"></div>
-    <small>Note: in this example, output is also shown in console.</small>
+    <div id="example-output"></div>
+    <p>
+      <small>Note: if no <code style="display: inline;">debugOutputElement</code> is defined, output is automatically sent to console.</small>
+    </p>
     <script type="module" src="./js/example.js"></script>
   </body>
 </html>
