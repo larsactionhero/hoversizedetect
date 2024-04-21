@@ -81,7 +81,5 @@ if(deviceInfo.screenMode === 3) {
 if(deviceInfo.screenMode === 4) {
   // a rare case but who knows 💁‍♀️
 }
-
-// and so on...
 ```
 
