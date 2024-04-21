@@ -21,10 +21,9 @@ export default class HoverSizeDetect {
     this.isAbove = false;
     this.breakpoint = null;
     this.deviceInfo = {};
-    this.breakpoint = this.options.breakpoint || 992;
-    this.debugOutputElement = this.options.debugOutputElement || console;
-    this.debug = 'debugOutputElement' in this.options;
-    console.log(this.debug);
+    this.breakpoint = options.breakpoint || 992;
+    this.debugOutputElement = options.debugOutputElement || null;
+    this.debug = options.debug || false;
   }
 
   getMediaQueryList() {
@@ -126,9 +125,12 @@ export default class HoverSizeDetect {
   }
 
   debugOutput() {
-    if (this.debugOutputElement instanceof HTMLElement) {
-      this.debug = true;
-      this.debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
+    if ('debugOutputElement' in this.options) {
+      if (this.debugOutputElement instanceof HTMLElement) {
+        this.debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
+      } else {
+        console.log(this.deviceInfo);
+      }
     } else {
       console.log(this.deviceInfo);
     }
@@ -143,8 +145,7 @@ export default class HoverSizeDetect {
       this.deviceInfo.width = entries[0].target.clientWidth;
       this.setDeviceInfo();
       this.setBodyClass();
-
-      if (this.debug) this.debugOutput();
+      if (this.debug === true) this.debugOutput();
     });
 
     resizeObserver.observe(document.body);
