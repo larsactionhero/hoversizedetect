@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>hoversizedetect example</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="module" crossorigin src="../js/example.js"></script>
+    <link rel="stylesheet" crossorigin href="../css/style.css">
+  </head>
+  <body>
+    <h1>Example</h1>
+
+    <h4>JS:</h4>
+    <code><pre>
+  import HoverSizeDetect from '../../js/hoversizedetect';
+
+  const options = {
+    breakpoint: 992,
+    debug: true,
+    debugOutputElement: document.querySelector('.example-output'),
+  };
+
+  const hoversizedetect = new HoverSizeDetect(options);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    hoversizedetect.init();
+  });</pre></code>
+    <h4>Provided Infomation</h4>
+    <div id="example-output"></div>
+    <p>
+      <small>Note: if no <code style="display: inline;">debugOutputElement</code> is defined, output is automatically sent to console.</small>
+    </p>
+  </body>
+</html>
