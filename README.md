@@ -74,6 +74,14 @@ if(deviceInfo.screenMode === 2) {
   // do something... e.g. enable mobile menu functionality
 }
 
+if(deviceInfo.screenMode === 3) {
+  // maybe a touch device in landscape mode?
+}
+
+if(deviceInfo.screenMode === 4) {
+  // a rare case but who knows 💁‍♀️
+}
+
 // and so on...
 ```
 
