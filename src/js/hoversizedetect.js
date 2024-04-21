@@ -64,7 +64,7 @@ export default class HoverSizeDetect {
   /**
    * meta fn to sret body classes along screen info
    */
-  setBodyClasses() {
+  setDeviceInfoBodyClasses() {
     if (this.hasHover) {
       this.removeBodyClass('no-hover');
       this.addBodyClass('has-hover');
@@ -117,7 +117,7 @@ export default class HoverSizeDetect {
       this.deviceInfo.mode = 4;
     }
 
-    this.setBodyClasses();
+    this.setDeviceInfoBodyClasses();
   }
 
   getInfo() {
