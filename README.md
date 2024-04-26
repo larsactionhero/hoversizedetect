@@ -43,12 +43,12 @@ myHoverSizeDetectInstance.init(); // initialize
 Body classes are set depending on screen size and hover ability.<br>
 Use them for your needs. Be creative! 🙂
 
-| breakpoint | hover mode | screen mode | added body classes |
+| breakpoint | hover mode | screen mode |  body classes |
 |---|---|---|---|
-| <div style="width:180px">>= `options.breakpoint`</div> | has hover | 1 | `.is-above-eq-{options.breakpoint}`, `.has-hover`  |
-| <div style="width:180px">< `options.breakpoint`</div> | no hover | 2 | `.is-below-{options.breakpoint}`, `.no-hover` |
-| <div style="width:180px">>= `options.breakpoint`</div> | no hover | 3 | `.is-above-eq-{options.breakpoint}`, `.no-hover` |
-| <div style="width:180px">< `options.breakpoint`</div> | has hover | 4 | `.is-below-{options.breakpoint}`, `.no-hover` |
+| <div style="width:180px">>= `options.breakpoint`</div> | has hover | 1 | `.is-above-eq-{options.breakpoint}`,<br> `.has-hover`  |
+| <div style="width:180px">< `options.breakpoint`</div> | no hover | 2 | `.is-below-{options.breakpoint}`,<br> `.no-hover` |
+| <div style="width:180px">>= `options.breakpoint`</div> | no hover | 3 | `.is-above-eq-{options.breakpoint}`,<br> `.no-hover` |
+| <div style="width:180px">< `options.breakpoint`</div> | has hover | 4 | `.is-below-{options.breakpoint}`,<br> `.no-hover` |
 
 
 ## Collected data
