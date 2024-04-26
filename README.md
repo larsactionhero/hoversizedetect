@@ -48,7 +48,7 @@ Use them for your needs. Be creative! 🙂
 | <div style="width:180px">>= `options.breakpoint`</div> | has hover | 1 | `.is-above-eq-{options.breakpoint}`,<br> `.has-hover`  |
 | <div style="width:180px">< `options.breakpoint`</div> | no hover | 2 | `.is-below-{options.breakpoint}`,<br> `.no-hover` |
 | <div style="width:180px">>= `options.breakpoint`</div> | no hover | 3 | `.is-above-eq-{options.breakpoint}`,<br> `.no-hover` |
-| <div style="width:180px">< `options.breakpoint`</div> | has hover | 4 | `.is-below-{options.breakpoint}`,<br> `.no-hover` |
+| <div style="width:180px">< `options.breakpoint`</div> | has hover | 4 | `.is-below-{options.breakpoint}`,<br> `.has-hover` |
 
 
 ## Collected data
