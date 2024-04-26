@@ -4,6 +4,10 @@ By watching for `(any-hover: hover) and (pointer: fine)` it looks for <br>
 1) the device's hover ability, and <br>
 2) if a precise pointer device like a mouse or trackpad is available.<br><br>
 
+### Basically 3 queries are tested:
+
+
+
 It's written in vanilla javascript and comes without any further dependencies. 
 
 ## Installation
@@ -11,75 +15,65 @@ It's written in vanilla javascript and comes without any further dependencies.
 npm install hoversizedetect
 ```
 
-## Usage
-First, make sure to import dependency:
+## Setup
 ```javascript
 import HoverSizeDetect from 'hoversizedetect';
-```
 
-## Setup
-Option are passed as `Object`. 
-```javascript
-const hoversizedetect = new HoverSizeDetect(options);
-```
-
-You may pass any breakpoint along your options.<br>
-### Basic setup:
-```javascript
-const hoversizedetect = new HoverSizeDetect({
+const myHoverSizeDetectInstance = new HoverSizeDetect({
   breakpoint: 992, // in px
   debug: true, // shows info in console (e.g. for development purposes)
 });
 
-hoversizedetect.init(); // call init() to fire plugin
+myHoverSizeDetectInstance.init(); // initialize
 ```
 
+## Options
+| Option | Type | Default | Description |
+|---|---|---|---|
+| breakpoint | Number | 992 | Matches against `min-width` rule (in px).<br>_Example:_<br>if config value is set to **768**, info will return **is >= 768px**.
+| debug | Boolean | false | if true, collected info is shown in console |
 
-### Returned data
-#### Example:
-Value of `options.breakpoint` follows the `min-width` rule and is set in px.<br>
-So if config value is set to **992**, device info will return "_is >= 992px_".<br>Additionally, a body class is added which might be helpful for your mobile device layout.
-
-| Test case | Returned information | Body css class |
-|---|---|---|
-| screen has `(any-hover: hover) and (pointer: fine)` | `mode: {screenMode}` | `.has-hover`<br> or<br> `.no-hover` | 
-| screen is >= `{options.breakpoint}` | `info: "is >= {options.breakpoint}` | `.is-above-{breakpoint}`<br> or<br> `is-below-{options.breakpoint}` | 
-
-#### Screenmodes:
-| screenMode | Returned information |
+## .matchmedia() queries
+| Query | Result |
 |---|---|
-| 1 | >= breakpoint, has hover 
-| 2 | < breakpoint, no hover |
-| 3 | >= breakpoint, no hover |
-| 4 | < breakpoint, has hover |
+| `(pointer: coarse)` | touchMobile  |
+| `(pointer: fine), (pointer: none) and (any-hover: hover)` | desktop |
+| `(pointer: fine) and (any-pointer: coarse)` | touchDesktop*  |
+
+ _* e.g. a touch screen laptop with hover ability, but no pointer device connected._
 
 
-Collected data is can be accessed via `hoversizedetect.getInfo();`.<br><br>
-**Example:** <br>
+## Body classes
+Body classes are set depending on screen size and hover ability.<br>
+Use them for your needs. Be creative! 🙂
+
+| breakpoint | hover mode | screen mode | added body classes |
+|---|---|---|---|
+| <div style="width:180px">>= `options.breakpoint`</div> | has hover | 1 | `.is-above-eq-{options.breakpoint}`, `.has-hover`  |
+| <div style="width:180px">< `options.breakpoint`</div> | no hover | 2 | `.is-below-{options.breakpoint}`, `.no-hover` |
+| <div style="width:180px">>= `options.breakpoint`</div> | no hover | 3 | `.is-above-eq-{options.breakpoint}`, `.no-hover` |
+| <div style="width:180px">< `options.breakpoint`</div> | has hover | 4 | `.is-below-{options.breakpoint}`, `.no-hover` |
+
+
+## Collected data
+Collected data can be accessed via `hoversizedetect.getInfo();`.<br>
 ```javascript
-const deviceinfo = hoversizedetect.getInfo();
-
-/* 
-* deviceinfo contains return value as object: 
-* {
-*   info: <String>,
-*   mode: <Number>
-* }
-*/
-if(deviceInfo.screenMode === 1) {
-  // we're on a device with (any-hover: hover) and (pointer: fine)
-}
-
-if(deviceInfo.screenMode === 2) {
-  // do something... e.g. enable mobile menu functionality
-}
-
-if(deviceInfo.screenMode === 3) {
-  // maybe a touch device in landscape mode?
-}
-
-if(deviceInfo.screenMode === 4) {
-  // a rare case but who knows 💁‍♀️
-}
+const collectedInfo = myHoverSizeDetectInstance.getInfo();
 ```
 
+`collectedInfo` is returned as object.<br><br>
+### Example<br>
+A device e.g. in 1920x1080px with mouse device connected returns the following data:
+```
+// content of collectedInfo:
+{
+  query: "(pointer: fine), (pointer: none) and (any-hover: hover)",
+  type: "desktop",
+  size: {
+    width: 1920,
+    height: 1080
+  },
+  info: "is >= 992, has hover",
+  mode: 1
+}
+```
