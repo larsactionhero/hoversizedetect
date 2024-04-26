@@ -16,20 +16,34 @@ export default class HoverSizeDetect {
   // eslint-disable-next-line no-unused-vars
   constructor(options) {
     this.options = options;
-    this.mediaQueryList = null;
-    this.hasHoverMode = false;
+    this.hasHover = false;
     this.isAbove = false;
     this.breakpoint = null;
     this.deviceInfo = {};
     this.breakpoint = options.breakpoint || 992;
-    this.debugOutputElement = null;
     this.debug = options.debug || false;
+    this.queries = {
+      '(pointer: coarse)': 'touchMobile',
+      '(pointer: fine), (pointer: none) and (any-hover: hover)': 'desktop',
+      '(pointer: fine) and (any-pointer: coarse)': 'touchDesktop',
+    };
+  }
+
+  deviceMatchMedia(query) {
+    const mediaQueryList = window.matchMedia(query);
+    return mediaQueryList.matches;
   }
 
   getMediaQueryList() {
-    // get media query list
-    this.mediaQueryList = window.matchMedia('(any-hover: hover) and (pointer: fine)');
-    this.hasHover = this.mediaQueryList.matches;
+    this.deviceMode = '';
+
+    for (const [query, type] of Object.entries(this.queries)) {
+      if (this.deviceMatchMedia(query)) {
+        this.deviceInfo.query = query;
+        this.deviceInfo.type = type;
+        if (type === 'desktop') this.hasHover = true;
+      }
+    }
   }
 
   /**
@@ -75,23 +89,34 @@ export default class HoverSizeDetect {
 
     if (this.isAbove) {
       this.removeBodyClass(`is-below-${this.breakpoint}`);
-      this.addBodyClass(`is-above-${this.breakpoint}`);
+      this.addBodyClass(`is-above-eq-${this.breakpoint}`);
     } else {
-      this.removeBodyClass(`is-above-${this.breakpoint}`);
+      this.removeBodyClass(`is-above-eq-${this.breakpoint}`);
       this.addBodyClass(`is-below-${this.breakpoint}`);
     }
   }
 
   /**
+   * 
+   * @param {Number} winW current screen width
+   * @param {Number} winH current screen height
+   */
+  setDeviceInfoSize(winW, winH) {
+    this.deviceInfo.size = {
+      width: winW,
+      height: winH,
+    };
+  }
+
+  /**
    *
    */
-  setDeviceInfo() {
+  setDeviceInfoMode() {
     const winW = window.innerWidth;
     const winH = window.innerHeight;
 
     this.isAbove = winW >= this.breakpoint;
-    this.deviceInfo.width = winW;
-    this.deviceInfo.height = winH;
+    this.setDeviceInfoSize(winW, winH);
 
     // 1) >= bp, has hover
     if (this.isAbove && this.hasHover) {
@@ -125,9 +150,9 @@ export default class HoverSizeDetect {
   }
 
   debugOutput() {
-    const debugOutputElement = document.querySelector('.example-output');
+    const debugOutputElement = document.getElementById('example-output');
     if (debugOutputElement) {
-      this.debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
+      debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
     } else {
       console.log(this.deviceInfo);
     }
@@ -135,12 +160,11 @@ export default class HoverSizeDetect {
 
   init() {
     this.getMediaQueryList();
-    this.setDeviceInfo(); // initially set info
+    this.setDeviceInfoMode(); // initially set info
 
     const resizeObserver = new ResizeObserver((entries) => {
-      this.deviceInfo.height = entries[0].target.clientHeight;
-      this.deviceInfo.width = entries[0].target.clientWidth;
-      this.setDeviceInfo();
+      this.setDeviceInfoSize(entries[0].target.clientWidth, entries[0].target.clientHeight);
+      this.setDeviceInfoMode();
       this.setBodyClass();
       if (this.debug === true) this.debugOutput();
     });
