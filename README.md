@@ -52,12 +52,11 @@ Use them for your needs. Be creative! 🙂
 
 
 ## Collected data
-Collected data can be accessed via `hoversizedetect.getInfo();`.<br>
+Collected data can be accessed via `hoversizedetect.getInfo(); // returns object`.<br>
 ```javascript
 const collectedInfo = myHoverSizeDetectInstance.getInfo();
 ```
 
-`collectedInfo` is returned as object.<br><br>
 ### Example<br>
 A device e.g. in 1920x1080px with mouse device connected returns the following data:
 ```
