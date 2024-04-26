@@ -52,9 +52,9 @@ Use them for your needs. Be creative! 🙂
 
 
 ## Collected data
-Collected data can be accessed via `hoversizedetect.getInfo(); // returns object`.<br>
+Collected data can be accessed via `myHoverSizeDetectInstance.getInfo();`.<br> `.getInfo()` returnes data as object.<br>
 ```javascript
-const collectedInfo = myHoverSizeDetectInstance.getInfo();
+const collectedInfo = myHoverSizeDetectInstance.getInfo(); 
 ```
 
 ### Example<br>
