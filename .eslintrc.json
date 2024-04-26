@@ -14,7 +14,8 @@
     "object-shorthand": "off",
     "class-methods-use-this": "off",
     "linebreak-style": "off",
-    "no-extraneous-dependencies": "off"
+    "no-extraneous-dependencies": "off",
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"]
   },
   "settings": {
     "import/resolver": {
