@@ -4,10 +4,6 @@ Currently it looks for<br>
 1) the device's hover ability, and <br>
 2) if a precise pointer device like a mouse or trackpad is available.<br><br>
 
-### Basically 3 queries are tested:
-
-
-
 It's written in vanilla javascript and comes without any further dependencies. 
 
 ## Installation
