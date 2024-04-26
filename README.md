@@ -52,7 +52,7 @@ Use them for your needs. Be creative! 🙂
 
 
 ## Collected data
-Collected data can be accessed via `myHoverSizeDetectInstance.getInfo();`.<br> `.getInfo()` returnes data as object.<br>
+Collected data can be accessed via `myHoverSizeDetectInstance.getInfo();` while `.getInfo()` returns data as object.<br>
 ```javascript
 const collectedInfo = myHoverSizeDetectInstance.getInfo(); 
 ```
