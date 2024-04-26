@@ -1,6 +1,9 @@
 {
   "name": "@larsactionhero/hoversizedetect",
-  "repository": "https://github.com/larsactionhero/hoversizedetect.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larsactionhero/hoversizedetect.git"
+  },
   "version": "1.0.0",
   "type": "module",
   "publishConfig": {
