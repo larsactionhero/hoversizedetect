@@ -33,6 +33,10 @@ export default defineConfig({
         chunkFileNames: 'js/[name].js',
         entryFileNames: 'js/[name].js',
         assetFileNames: ({ name }) => {
+          if (/\.(jpe?g|png|svg)$/.test(name ?? '')) {
+            return 'img/[name][extname]';
+          }
+
           if (/\.css$/.test(name ?? '')) {
             return 'css/style[extname]';
           }
