@@ -25,13 +25,13 @@ myHoverSizeDetectInstance.init(); // initialize
 
 ## Options
 | Option | Type | Default | Description |
-|---|---|---|---|
+|:---|:---|:---|:---|
 | breakpoint | Number | 992 | Matches against `min-width` rule (in px).<br>_Example:_<br>if config value is set to **768**, info will return **is >= 768px**.
 | debug | Boolean | false | if true, collected info is shown in console |
 
 ## .matchmedia() queries
 | Query | Result |
-|---|---|
+|:---|:---|
 | `(pointer: coarse)` | touchMobile  |
 | `(pointer: fine), (pointer: none) and (any-hover: hover)` | desktop |
 | `(pointer: fine) and (any-pointer: coarse)` | touchDesktop*  |
@@ -44,7 +44,7 @@ Body classes are set depending on screen size and hover ability.<br>
 Use them for your needs. Be creative! 🙂
 
 | breakpoint | hover mode | screen mode |  body classes |
-|---|---|---|---|
+|:---|:---|:---|:---|
 | <div style="width:180px">>= `options.breakpoint`</div> | has hover | 1 | `.is-above-eq-{options.breakpoint}`,<br> `.has-hover`  |
 | <div style="width:180px">< `options.breakpoint`</div> | no hover | 2 | `.is-below-{options.breakpoint}`,<br> `.no-hover` |
 | <div style="width:180px">>= `options.breakpoint`</div> | no hover | 3 | `.is-above-eq-{options.breakpoint}`,<br> `.no-hover` |
