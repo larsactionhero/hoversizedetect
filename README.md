@@ -1,8 +1,9 @@
 # hover & size detect
-hoversizedetect.js looks for a device's information provided in `window.matchMedia`.<br>
-Currently it looks for<br>
-1) the device's hover ability, and <br>
-2) if a precise pointer device like a mouse or trackpad is available.<br><br>
+hoversizedetect.js looks for a device's information provided in `window.matchMedia`.  
+Currently it looks for  
+1) the device's hover ability, and  
+2) if a precise pointer device like a mouse or trackpad is available.  
+  
 
 It's written in vanilla javascript and comes without any further dependencies. 
 
