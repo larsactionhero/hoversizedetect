@@ -70,7 +70,8 @@ A device e.g. in 1920x1080px with mouse device connected returns the following d
     height: 1080
   },
   info: "is >= 992, has hover",
-  mode: 1
+  mode: 1,
+  hasHover: true
 }
 ```
 
