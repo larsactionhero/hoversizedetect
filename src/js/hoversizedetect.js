@@ -169,7 +169,6 @@ export default class HoverSizeDetect {
     const resizeObserver = new ResizeObserver((entries) => {
       this.setDeviceInfoSize(entries[0].target.clientWidth, entries[0].target.clientHeight);
       this.setDeviceInfoMode();
-      this.setBodyClass();
       if (this.debug === true) this.debugOutput();
     });
 
