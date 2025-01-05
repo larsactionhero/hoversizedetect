@@ -7,7 +7,7 @@
   "version": "1.0.5",
   "type": "module",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "@larsactionhero:registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "dev": "vite",
