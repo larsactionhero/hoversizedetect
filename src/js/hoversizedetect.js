@@ -158,7 +158,7 @@ export default class HoverSizeDetect {
     if (debugOutputElement) {
       debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
     }
-    
+
     console.log(this.deviceInfo);
   }
 
