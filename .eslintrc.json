@@ -24,7 +24,7 @@
             ["@", "./src"],
             ["~", "./node_modules"]
         ],
-        "extensions": [".js", ".ts", ".vue"]
+        "extensions": [".js", ".ts"]
       }
     }
   }
