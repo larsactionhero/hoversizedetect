@@ -13,7 +13,6 @@
  * window.matchMedia('(max-width: 567px) and (any-hover: hover) and (pointer: coarse)');
  */
 export default class HoverSizeDetect {
-  // eslint-disable-next-line no-unused-vars
   constructor(options) {
     this.options = options;
     this.hasHover = false;
@@ -41,22 +40,25 @@ export default class HoverSizeDetect {
       if (this.deviceMatchMedia(query)) {
         this.deviceInfo.query = query;
         this.deviceInfo.type = type;
-        if (type === 'desktop') this.hasHover = true;
+        if (type === 'desktop')
+          this.hasHover = true;
       }
     }
   }
 
   /**
    * @param {Array or String} arg array or string of class(es)
-   * @param {Number} mode 1: add, 0: remove
+   * @param {number} mode 1: add, 0: remove
    */
   setBodyClass(arg, mode = 1) {
     const tmpArr = [];
     const bodyEl = document.body;
-    if (!Array.isArray(arg) || typeof arg === 'string') tmpArr.push(arg);
+    if (!Array.isArray(arg) || typeof arg === 'string')
+      tmpArr.push(arg);
     if (mode === 1) {
       bodyEl.classList.add(...tmpArr);
-    } else {
+    }
+    else {
       bodyEl.classList.remove(...tmpArr);
     }
   }
@@ -82,7 +84,8 @@ export default class HoverSizeDetect {
     if (this.hasHover) {
       this.removeBodyClass('no-hover');
       this.addBodyClass('has-hover');
-    } else {
+    }
+    else {
       this.removeBodyClass('has-hover');
       this.addBodyClass('no-hover');
     }
@@ -90,7 +93,8 @@ export default class HoverSizeDetect {
     if (this.isAbove) {
       this.removeBodyClass(`is-below-${this.breakpoint}`);
       this.addBodyClass(`is-above-eq-${this.breakpoint}`);
-    } else {
+    }
+    else {
       this.removeBodyClass(`is-above-eq-${this.breakpoint}`);
       this.addBodyClass(`is-below-${this.breakpoint}`);
     }
@@ -98,8 +102,8 @@ export default class HoverSizeDetect {
 
   /**
    *
-   * @param {Number} winW current screen width
-   * @param {Number} winH current screen height
+   * @param {number} winW current screen width
+   * @param {number} winH current screen height
    */
   setDeviceInfoSize(winW, winH) {
     this.deviceInfo.size = {
@@ -169,7 +173,8 @@ export default class HoverSizeDetect {
     const resizeObserver = new ResizeObserver((entries) => {
       this.setDeviceInfoSize(entries[0].target.clientWidth, entries[0].target.clientHeight);
       this.setDeviceInfoMode();
-      if (this.debug === true) this.debugOutput();
+      if (this.debug === true)
+        this.debugOutput();
     });
 
     resizeObserver.observe(document.body);
