@@ -56,7 +56,7 @@ class h {
    */
   setDeviceInfoMode() {
     const e = window.innerWidth, i = window.innerHeight;
-    this.isAbove = e >= this.breakpoint, this.setDeviceInfoSize(e, i), this.isAbove && this.hasHover && (this.deviceInfo.info = `is >= ${this.breakpoint}, has hover`, this.deviceInfo.mode = 1, this.deviceInfo.hasHover = !0), !this.isAbove && !this.hasHover && (this.deviceInfo.info = `is < ${this.breakpoint}, no hover`, this.deviceInfo.mode = 2, this.deviceInfo.hasHover = !1), this.isAbove && !this.hasHover && (this.deviceInfo.info = `is >= ${this.breakpoint}, no hover`, this.deviceInfo.mode = 3, this.deviceInfo.hasHover = !1), !this.isAbove && this.hasHover && (this.deviceInfo.info = `is < ${this.breakpoint}, has hover`, this.deviceInfo.mode = 4, this.deviceInfo.hasHover = !0), this.setDeviceInfoBodyClasses();
+    this.isAbove = e >= this.breakpoint, this.setDeviceInfoSize(e, i), this.isAbove && this.hasHover && (this.deviceInfo.info = `is >= ${this.breakpoint}, has hover`, this.deviceInfo.mode = 1, this.deviceInfo.hasHover = !0), !this.isAbove && !this.hasHover && (this.deviceInfo.info = `width < ${this.breakpoint}, no hover`, this.deviceInfo.mode = 2, this.deviceInfo.hasHover = !1), this.isAbove && !this.hasHover && (this.deviceInfo.info = `width >= ${this.breakpoint}, no hover`, this.deviceInfo.mode = 3, this.deviceInfo.hasHover = !1), !this.isAbove && this.hasHover && (this.deviceInfo.info = `width < ${this.breakpoint}, has hover`, this.deviceInfo.mode = 4, this.deviceInfo.hasHover = !0), this.setDeviceInfoBodyClasses();
   }
   getInfo() {
     return this.deviceInfo;
