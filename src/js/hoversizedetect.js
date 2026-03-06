@@ -131,21 +131,21 @@ export default class HoverSizeDetect {
 
     // 2) < bp, no hover
     if (!this.isAbove && !this.hasHover) {
-      this.deviceInfo.info = `is < ${this.breakpoint}, no hover`;
+      this.deviceInfo.info = `width < ${this.breakpoint}, no hover`;
       this.deviceInfo.mode = 2;
       this.deviceInfo.hasHover = false;
     }
 
     // 3) >= bp, no hover
     if (this.isAbove && !this.hasHover) {
-      this.deviceInfo.info = `is >= ${this.breakpoint}, no hover`;
+      this.deviceInfo.info = `width >= ${this.breakpoint}, no hover`;
       this.deviceInfo.mode = 3;
       this.deviceInfo.hasHover = false;
     }
 
     // 4) < bp, has hover
     if (!this.isAbove && this.hasHover) {
-      this.deviceInfo.info = `is < ${this.breakpoint}, has hover`;
+      this.deviceInfo.info = `width < ${this.breakpoint}, has hover`;
       this.deviceInfo.mode = 4;
       this.deviceInfo.hasHover = true;
     }

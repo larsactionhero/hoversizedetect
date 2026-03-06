@@ -1,7 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { defineConfig } from 'vite';
+import { resolve } from 'node:path';
 import alias from '@rollup/plugin-alias';
-import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
 const path = resolve(__dirname);
 const rootPath = resolve(__dirname, './src');
@@ -10,7 +9,7 @@ export default defineConfig({
   base: '',
   root: rootPath,
   plugins: [
-    alias()
+    alias(),
   ],
   resolve: {
     alias: {
@@ -30,18 +29,16 @@ export default defineConfig({
         example: resolve(rootPath, 'example/index.html'),
       },
       output: {
-        chunkFileNames: 'js/[name].js',
-        entryFileNames: 'js/[name].js',
+        chunkFileNames: 'example/js/[name].js',
+        entryFileNames: 'example/js/[name].js',
         assetFileNames: ({ name }) => {
           if (/\.(jpe?g|png|svg)$/.test(name ?? '')) {
-            return 'img/[name][extname]';
+            return 'example/img/[name][extname]';
           }
-
           if (/\.css$/.test(name ?? '')) {
-            return 'css/style[extname]';
+            return 'example/css/style[extname]';
           }
-
-          return '[name][extname]';
+          return 'example/[name][extname]';
         },
       },
     },
