@@ -78,4 +78,3 @@ A device e.g. in 1920x1080px with mouse device connected returns the following d
 
 ## Demo
 See https://larsactionhero.com/hoversizedetect/example for demo an example (open console to see data).
-```
