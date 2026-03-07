@@ -1,9 +1,13 @@
 # hoversizedetect.js
 [![npm version](https://img.shields.io/npm/v/hoversizedetect)](https://www.npmjs.com/package/hoversizedetect)
 [![npm downloads](https://img.shields.io/npm/dm/hoversizedetect)](https://www.npmjs.com/package/hoversizedetect)
-[![license](https://img.shields.io/npm/l/hoversizedetect)](https://github.com/larsactionhero/hoversizedetect/blob/main/LICENSE)
+[![license](https://img.shields.io/npm/l/hoversizedetect)](https://github.com/larsactionhero/hoversizedetect/blob/main/LICENSE)  
 
-hoversizedetect.js is a tiny vanilla js script that looks for a device's information provided in `window.matchMedia`.    
+🔗 <a href="https://larsactionhero.com/hoversizedetect/" target="_blank">https://larsactionhero.com/hoversizedetect/</a>
+
+-----
+
+hoversizedetect.js is a tiny vanilla js script that collects a device's information provided in `window.matchMedia`.    
 
 It watches for  
 1) the device's hover ability 
@@ -13,8 +17,7 @@ It watches for
 ## Installation  
 
 ### NPM Package
-https://www.npmjs.com/package/hoversizedetect
-
+🔗 <a href="https://www.npmjs.com/package/hoversizedetect/" target="_blank">https://www.npmjs.com/package/hoversizedetect</a>
 
 ```
 npm install hoversizedetect
@@ -35,7 +38,7 @@ myHoverSizeDetectInstance.init(); // initialize
 ## Options
 | Option | Type | Default | Description |
 |:---|:---|:---|:---|
-| breakpoint | Number | 992 | Matches against `min-width` rule (in px).<br>_Example:_<br>if config value is set to **768**, info will return **is >= 768px**.
+| breakpoint | Number | 992 | Matches against `min-width` rule (in px).<br>_Example:_<br>if config value is set to **768**, info will return:  **is >= 768px**
 | debug | Boolean | false | if true, collected info appears  in console. |
 
 ## .matchmedia() queries
@@ -84,4 +87,5 @@ A device e.g. in 1920x1080px with mouse device connected returns the following d
 ```
 
 ## Demo
-See https://larsactionhero.com/hoversizedetect/example for demo an example (open console to see data).
+<a href="https://larsactionhero.com/hoversizedetect/example" target="_blank">https://larsactionhero.com/hoversizedetect/example</a>  
+ℹ️ Open browser console to see data output.
