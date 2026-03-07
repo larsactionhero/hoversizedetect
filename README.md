@@ -1,15 +1,22 @@
-# hover & size detect
-hoversizedetect.js looks for a device's information provided in `window.matchMedia`.  
+# hoversizedetect.js
+[![npm version](https://img.shields.io/npm/v/hoversizedetect)](https://www.npmjs.com/package/hoversizedetect)
+[![npm downloads](https://img.shields.io/npm/dm/hoversizedetect)](https://www.npmjs.com/package/hoversizedetect)
+[![license](https://img.shields.io/npm/l/hoversizedetect)](https://github.com/larsactionhero/hoversizedetect/blob/main/LICENSE)
+
+hoversizedetect.js is a tiny vanilla js script that looks for a device's information provided in `window.matchMedia`.    
 
 It watches for  
-1) the device's hover ability, and  
-2) if a precise pointer device like a mouse or trackpad is available.  
+1) the device's hover ability 
+2) if a precise pointer device like a mouse or trackpad is available.
   
 
-It is written in vanilla javascript and comes without any further dependencies. 
+## Installation  
 
-## Installation
-```npm
+### NPM Package
+https://www.npmjs.com/package/hoversizedetect
+
+
+```
 npm install hoversizedetect
 ```
 
@@ -29,7 +36,7 @@ myHoverSizeDetectInstance.init(); // initialize
 | Option | Type | Default | Description |
 |:---|:---|:---|:---|
 | breakpoint | Number | 992 | Matches against `min-width` rule (in px).<br>_Example:_<br>if config value is set to **768**, info will return **is >= 768px**.
-| debug | Boolean | false | if true, collected info is shown in console |
+| debug | Boolean | false | if true, collected info appears  in console. |
 
 ## .matchmedia() queries
 | Query | Result |

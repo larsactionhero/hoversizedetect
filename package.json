@@ -9,6 +9,7 @@
   "publishConfig": {
     "@larsactionhero:registry": "https://npm.pkg.github.com"
   },
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite build --config vite.config.lib.js",
