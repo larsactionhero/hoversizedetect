@@ -94,6 +94,7 @@ export default class HoverSizeDetect {
       mode = 4;
     }
 
+    this.deviceInfo.info = info;
     this.deviceInfo.hasHover = hasHover;
     this.deviceInfo.mode = mode;
     this.setDeviceInfoBodyClasses();
