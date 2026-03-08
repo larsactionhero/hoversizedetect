@@ -17,6 +17,7 @@ export default defineConfig({
   build: {
     outDir: resolve(path, './dist'),
     emptyOutDir: false,
+    minify: 'esbuild',
     lib: {
       entry: resolve(path, './index.js'),
       name: 'HoverSizeDetect',
