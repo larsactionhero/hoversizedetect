@@ -17,6 +17,12 @@ export default defineConfig({
   build: {
     outDir: resolve(path, './dist'),
     emptyOutDir: false,
+    minify: 'terser',
+    terserOptions: {
+      format: {
+        comments: false,
+      },
+    },
     lib: {
       entry: resolve(path, './index.js'),
       name: 'HoverSizeDetect',

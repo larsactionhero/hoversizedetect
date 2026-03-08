@@ -1,3 +1,4 @@
+/* eslint-disable regexp/no-unused-capturing-group */
 import { resolve } from 'node:path';
 import alias from '@rollup/plugin-alias';
 import { defineConfig } from 'vite';
