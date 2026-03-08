@@ -13,14 +13,12 @@
  * window.matchMedia('(max-width: 567px) and (any-hover: hover) and (pointer: coarse)');
  */
 export default class HoverSizeDetect {
-  constructor(options) {
-    this.options = options;
+  constructor({ breakpoint = 992, debug = false } = {}) {
     this.hasHover = false;
     this.isAbove = false;
-    this.breakpoint = null;
+    this.bp = breakpoint;
+    this.debug = debug;
     this.deviceInfo = {};
-    this.breakpoint = options.breakpoint || 992;
-    this.debug = options.debug || false;
     this.queries = {
       '(pointer: coarse)': 'touchMobile',
       '(pointer: fine), (pointer: none) and (any-hover: hover)': 'desktop',
@@ -28,16 +26,21 @@ export default class HoverSizeDetect {
     };
   }
 
-  deviceMatchMedia(query) {
-    const mediaQueryList = window.matchMedia(query);
-    return mediaQueryList.matches;
+  /**
+   * @param {string} add class to add
+   * @param {string} remove class to remove
+   */
+  toggleBodyClass(add, remove) {
+    document.body.classList.add(add);
+    document.body.classList.remove(remove);
   }
 
+  /**
+   * iterates media queries and sets deviceInfo query/type and hasHover flag
+   */
   getMediaQueryList() {
-    this.deviceMode = '';
-
     for (const [query, type] of Object.entries(this.queries)) {
-      if (this.deviceMatchMedia(query)) {
+      if (window.matchMedia(query).matches) {
         this.deviceInfo.query = query;
         this.deviceInfo.type = type;
         if (type === 'desktop')
@@ -47,136 +50,83 @@ export default class HoverSizeDetect {
   }
 
   /**
-   * @param {Array or String} arg array or string of class(es)
-   * @param {number} mode 1: add, 0: remove
-   */
-  setBodyClass(arg, mode = 1) {
-    const tmpArr = [];
-    const bodyEl = document.body;
-    if (!Array.isArray(arg) || typeof arg === 'string')
-      tmpArr.push(arg);
-    if (mode === 1) {
-      bodyEl.classList.add(...tmpArr);
-    }
-    else {
-      bodyEl.classList.remove(...tmpArr);
-    }
-  }
-
-  /**
-   * @param {Array or String} arg array or string of class(es)
-   */
-  addBodyClass(cls) {
-    this.setBodyClass(cls, 1);
-  }
-
-  /**
-   * @param {Array or String} arg array or string of class(es)
-   */
-  removeBodyClass(cls) {
-    this.setBodyClass(cls, 0);
-  }
-
-  /**
-   * meta fn to sret body classes along screen info
+   * sets body classes based on hover capability and breakpoint state
    */
   setDeviceInfoBodyClasses() {
-    if (this.hasHover) {
-      this.removeBodyClass('no-hover');
-      this.addBodyClass('has-hover');
-    }
-    else {
-      this.removeBodyClass('has-hover');
-      this.addBodyClass('no-hover');
-    }
-
-    if (this.isAbove) {
-      this.removeBodyClass(`is-below-${this.breakpoint}`);
-      this.addBodyClass(`is-above-eq-${this.breakpoint}`);
-    }
-    else {
-      this.removeBodyClass(`is-above-eq-${this.breakpoint}`);
-      this.addBodyClass(`is-below-${this.breakpoint}`);
-    }
+    const bp = this.bp;
+    this.toggleBodyClass(
+      this.hasHover ? 'has-hover' : 'no-hover',
+      this.hasHover ? 'no-hover' : 'has-hover',
+    );
+    this.toggleBodyClass(
+      this.isAbove ? `is-above-eq-${bp}` : `is-below-${bp}`,
+      this.isAbove ? `is-below-${bp}` : `is-above-eq-${bp}`,
+    );
   }
 
   /**
-   *
    * @param {number} winW current screen width
    * @param {number} winH current screen height
    */
-  setDeviceInfoSize(winW, winH) {
-    this.deviceInfo.size = {
-      width: winW,
-      height: winH,
-    };
-  }
+  setDeviceInfoMode(winW = window.innerWidth, winH = window.innerHeight) {
+    this.isAbove = winW >= this.bp;
+    this.deviceInfo.size = { width: winW, height: winH };
 
-  /**
-   *
-   */
-  setDeviceInfoMode() {
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
+    const isAbove = this.isAbove;
+    const hasHover = this.hasHover;
+    let info = null;
+    let mode = null;
 
-    this.isAbove = winW >= this.breakpoint;
-    this.setDeviceInfoSize(winW, winH);
-
-    // 1) >= bp, has hover
-    if (this.isAbove && this.hasHover) {
-      this.deviceInfo.info = `is >= ${this.breakpoint}, has hover`;
-      this.deviceInfo.mode = 1;
-      this.deviceInfo.hasHover = true;
+    if (isAbove && hasHover) {
+      info = `is >= ${this.bp}, has hover`;
+      mode = 1;
+    }
+    else if (!isAbove && !hasHover) {
+      info = `width < ${this.bp}, no hover`;
+      mode = 2;
+    }
+    else if (isAbove && !hasHover) {
+      info = `width >= ${this.bp}, no hover`;
+      mode = 3;
+    }
+    else {
+      info = `width < ${this.bp}, has hover`;
+      mode = 4;
     }
 
-    // 2) < bp, no hover
-    if (!this.isAbove && !this.hasHover) {
-      this.deviceInfo.info = `width < ${this.breakpoint}, no hover`;
-      this.deviceInfo.mode = 2;
-      this.deviceInfo.hasHover = false;
-    }
-
-    // 3) >= bp, no hover
-    if (this.isAbove && !this.hasHover) {
-      this.deviceInfo.info = `width >= ${this.breakpoint}, no hover`;
-      this.deviceInfo.mode = 3;
-      this.deviceInfo.hasHover = false;
-    }
-
-    // 4) < bp, has hover
-    if (!this.isAbove && this.hasHover) {
-      this.deviceInfo.info = `width < ${this.breakpoint}, has hover`;
-      this.deviceInfo.mode = 4;
-      this.deviceInfo.hasHover = true;
-    }
-
+    this.deviceInfo.hasHover = hasHover;
+    this.deviceInfo.mode = mode;
     this.setDeviceInfoBodyClasses();
   }
 
+  /**
+   * @returns {object} current deviceInfo state
+   */
   getInfo() {
     return this.deviceInfo;
   }
 
+  /**
+   * outputs deviceInfo to #example-output element and console
+   */
   debugOutput() {
-    const debugOutputElement = document.getElementById('example-output');
-    if (debugOutputElement) {
-      debugOutputElement.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, undefined, 2)}</pre>`;
-    }
-
+    const el = document.getElementById('example-output');
+    if (el)
+      el.innerHTML = `<pre>${JSON.stringify(this.deviceInfo, null, 2)}</pre>`;
     console.log(this.deviceInfo);
   }
 
+  /**
+   * initializes media query detection and attaches ResizeObserver to body
+   */
   init() {
     this.getMediaQueryList();
-    this.setDeviceInfoMode(); // initially set info
+    this.setDeviceInfoMode();
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      this.setDeviceInfoSize(entries[0].target.clientWidth, entries[0].target.clientHeight);
-      this.setDeviceInfoMode();
-      if (this.debug === true)
+    new ResizeObserver(([entry]) => {
+      this.setDeviceInfoMode(entry.target.clientWidth, entry.target.clientHeight);
+      if (this.debug)
         this.debugOutput();
-    });
-
-    resizeObserver.observe(document.body);
+    }).observe(document.body);
   }
 }
