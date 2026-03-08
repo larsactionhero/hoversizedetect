@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/larsactionhero/hoversizedetect.git"
   },
-  "version": "1.10.6",
+  "version": "v1.10.7",
   "type": "module",
   "publishConfig": {
     "@larsactionhero:registry": "https://npm.pkg.github.com"
