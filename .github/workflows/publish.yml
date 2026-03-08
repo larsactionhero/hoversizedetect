@@ -3,18 +3,21 @@ name: Publish to npm
 on:
   push:
     tags:
-      - 'v*'   # triggers tags like v1.10.4, v2.0.0 ...
+      - 'v*' # triggers tags like v1.10.4, v2.0.0 ...
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # for github release
-      id-token: write   # for npm provenance
+      contents: write # for github release
+      id-token: write # for npm provenance
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main # get latest main, not from tag commit
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,7 +29,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build   # if ypu have a build step
+        run: npm run build # if ypu have a build step
 
       - name: Publish to npm
         run: npm publish --access public
@@ -36,4 +39,4 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          generate_release_notes: true   # creates changelog from commits automatically
+          generate_release_notes: true # creates changelog from commits automatically
