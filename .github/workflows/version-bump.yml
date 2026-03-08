@@ -37,4 +37,5 @@ jobs:
           git add package.json
           git commit -m "chore: bump version to v${{ steps.version.outputs.version }}"
           git tag "v${{ steps.version.outputs.version }}"
+          git pull --rebase origin main
           git push origin main --follow-tags
