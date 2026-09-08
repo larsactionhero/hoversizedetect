@@ -7,12 +7,11 @@
 
 -----
 
-hoversizedetect.js is a tiny vanilla js script (~1.63kB minified) that collects a device's information provided in `window.matchMedia`.  
-Useful for detecting hover ability on devices and getting their screen size.  
-The collected data shares at least enough information so that most cases for mobile/touch and desktop devices can targeted.
-Let's say it works as a **mobile and touch device detection.**
+hoversizedetect.js works as a **mobile and touch device detection.**
+It's written in vanilla js (~1.63kB minified) and detects a device's has hover ability and screen size.  
+The device's information provided in `window.matchMedia` is collected – the collected data provides enough information for targeting most cases of mobile/touch and desktop devices.  
 
-It watches for  
+It detects    
 1) the device's hover ability 
 2) if a precise pointer device like a mouse or trackpad is available.
   
