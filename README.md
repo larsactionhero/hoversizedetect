@@ -89,5 +89,5 @@ A device e.g. in 1920x1080px with mouse device connected returns the following d
 ```
 
 ## Demo
-<a href="https://larsactionhero.com/hoversizedetect/example" target="_blank">https://larsactionhero.com/hoversizedetect/example</a>  
+<a href="https://larsactionhero.com/git/hoversizedetect/example" target="_blank">https://larsactionhero.com/git/hoversizedetect/example</a>  
 ℹ️ Open browser console to see data output.
