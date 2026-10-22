@@ -3,7 +3,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/hoversizedetect)](https://www.npmjs.com/package/hoversizedetect)
 [![license](https://img.shields.io/npm/l/hoversizedetect)](https://github.com/larsactionhero/hoversizedetect/blob/main/LICENSE)  
 
-🔗 <a href="https://larsactionhero.com/hoversizedetect/" target="_blank">https://larsactionhero.com/hoversizedetect/</a>
+🔗 <a href="https://larsactionhero.com/git/hoversizedetect/" target="_blank">https://larsactionhero.com/hoversizedetect/</a>
 
 -----
 
