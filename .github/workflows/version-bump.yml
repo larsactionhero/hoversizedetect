@@ -14,15 +14,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false # in Release-Builds keinen Cache nutzen
 
       # Trusted Publishing benötigt npm >= 11.5.1
       - name: Update npm
@@ -43,7 +44,9 @@ jobs:
       # Kein NPM_TOKEN / keine .npmrc: npm tauscht das OIDC-Token selbst aus.
       # NODE_AUTH_TOKEN muss leer sein, sonst wird OIDC übersprungen.
       - name: Publish to npm
-        run: npm publish --access public
+        run: |
+          npm config get registry
+          npm publish --access public --registry=https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ''
 
@@ -55,6 +58,8 @@ jobs:
           git add package-lock.json 2>/dev/null || true
           git commit -m "chore: bump version to v${{ steps.version.outputs.version }} [skip ci]"
           git tag "v${{ steps.version.outputs.version }}"
+          # Der Build ändert getrackte Dateien (z. B. dist/). Verwerfen, sonst bricht pull --rebase ab.
+          git restore .
           git pull --rebase origin main
           git push origin main --follow-tags
 
