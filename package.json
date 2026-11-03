@@ -6,8 +6,15 @@
   },
   "version": "1.38.0",
   "type": "module",
+  "files": [
+    "dist/js",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "publishConfig": {
-    "@larsactionhero:registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "license": "MIT",
   "scripts": {
