@@ -8,13 +8,17 @@
 -----
 
 hoversizedetect.js works as a **mobile and touch device detection.**
-It's written in vanilla js (~1.63kB minified) and detects a device's has hover ability and screen size.  
-The device's information provided in `window.matchMedia` is collected – the collected data provides enough information for targeting most cases of mobile/touch and desktop devices.  
+It's written in vanilla js (~1.63kB minified) and detects a device's hover ability and screen size.  
+The device's information provided in `window.matchMedia` is collected.  
+Collected data provides enough information for targeting most cases of mobile/touch and desktop devices.  
 
-It detects    
-1) the device's hover ability 
-2) if a precise pointer device like a mouse or trackpad is available.
-  
+## Short
+It     
+1) detects the device's hover ability. 
+2) detects if a precise pointer device like a mouse or trackpad is available.
+3) sets a class on `body` element for identification for each detected mode.
+4) provides a javascript object to use for further usage.
+5) provides a short `Number` for each detected mode from 1-4.
 
 ## Installation  
 
@@ -27,6 +31,7 @@ npm install hoversizedetect
 
 ## Setup
 ```javascript
+// JS
 import HoverSizeDetect from 'hoversizedetect';
 
 const myHoverSizeDetectInstance = new HoverSizeDetect({
@@ -72,7 +77,7 @@ const collectedInfo = myHoverSizeDetectInstance.getInfo();
 ```
 
 ### Example<br>
-A device e.g. in 1920x1080px with mouse device connected returns the following data:
+A device e.g. in 1920x1080px with mouse connected returns the following data:
 ```
 // content of collectedInfo:
 {
