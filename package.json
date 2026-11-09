@@ -8,6 +8,8 @@
   "type": "module",
   "files": [
     "dist/js",
+    "dist/example/index.html",
+    "dist/example/js/example.js",
     "index.js",
     "README.md",
     "LICENSE"

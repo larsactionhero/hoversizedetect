@@ -50,6 +50,19 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ''
 
+      # `npm deprecate` does not support Trusted Publishing (OIDC); therefore, a separate Granular Access Token 
+      # (stored as the secret `NPM_DEPRECATE_TOKEN`) with write permissions and 2FA bypass is required. 
+      # If this step fails, the workflow will still be marked as successful (green).
+      # Experiment: Can the command be executed using OIDC (without a token)? If not, remove the step.
+      - name: Deprecate older npm versions
+        continue-on-error: true
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          npm deprecate "${NAME}@<${{ steps.version.outputs.version }}" \
+            "Deprecated. Please update to ${{ steps.version.outputs.version }} or newer."
+        env:
+          NODE_AUTH_TOKEN: ''
+
       - name: Commit & tag
         run: |
           git config user.name "github-actions[bot]"
@@ -91,15 +104,3 @@ jobs:
 
           $BODY"
             done
-
-      # npm deprecate unterstützt kein Trusted Publishing (OIDC), daher ein separates
-      # Granular Access Token (Secret NPM_DEPRECATE_TOKEN) mit Schreibrechten und 2FA-Bypass.
-      # Schlägt der Schritt fehl, bleibt der Workflow trotzdem grün.
-      - name: Deprecate older npm versions
-        continue-on-error: true
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_DEPRECATE_TOKEN }}
-        run: |
-          NAME=$(node -p "require('./package.json').name")
-          npm deprecate "${NAME}@<${{ steps.version.outputs.version }}" \
-            "Deprecated. Please update to ${{ steps.version.outputs.version }} or newer."
