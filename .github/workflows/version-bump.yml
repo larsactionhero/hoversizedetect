@@ -69,3 +69,37 @@ jobs:
           tag_name: "v${{ steps.version.outputs.version }}"
           name: "v${{ steps.version.outputs.version }}"
           generate_release_notes: true
+          make_latest: true
+
+      # Alle älteren Releases (die noch keine Pre-releases sind) als deprecated markieren.
+      # Bereits markierte Releases werden übersprungen, damit der Hinweis nicht doppelt erscheint.
+      - name: Deprecate older GitHub releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LATEST="v${{ steps.version.outputs.version }}"
+          gh release list --repo "${{ github.repository }}" --limit 200 \
+            --json tagName,isPrerelease \
+            -q '.[] | select(.isPrerelease == false) | .tagName' \
+          | { grep -vx "$LATEST" || true; } \
+          | while read -r tag; do
+              echo "Deprecating $tag"
+              BODY=$(gh release view "$tag" --repo "${{ github.repository }}" --json body -q .body)
+              gh release edit "$tag" --repo "${{ github.repository }}" \
+                --prerelease \
+                --notes "⚠️ **DEPRECATED:** Please update to $LATEST.
+
+          $BODY"
+            done
+
+      # npm deprecate unterstützt kein Trusted Publishing (OIDC), daher ein separates
+      # Granular Access Token (Secret NPM_DEPRECATE_TOKEN) mit Schreibrechten und 2FA-Bypass.
+      # Schlägt der Schritt fehl, bleibt der Workflow trotzdem grün.
+      - name: Deprecate older npm versions
+        continue-on-error: true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_DEPRECATE_TOKEN }}
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          npm deprecate "${NAME}@<${{ steps.version.outputs.version }}" \
+            "Deprecated. Please update to ${{ steps.version.outputs.version }} or newer."
